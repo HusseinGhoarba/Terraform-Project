@@ -1,3 +1,4 @@
+#----------------------AMI For Private
 data "aws_ami" "amazon-os" {
   most_recent      = true
   owners           = ["amazon"]
@@ -6,23 +7,20 @@ data "aws_ami" "amazon-os" {
     values = ["amzn2-ami-hvm-*-x86_64-ebs"]
   }
 }
-
+#----------------------AMI For Public
 data "aws_ami" "ubuntu" {
     most_recent = true
-
     filter {
         name   = "name"
         values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
     }
-
     filter {
         name   = "virtualization-type"
         values = ["hvm"]
     }
-
     owners = ["099720109477"]
 }
-
+#----------------------------Public Modules
 module "pub-instance1" {
   source = "./public-instances"
   ami-id = data.aws_ami.ubuntu.image_id
@@ -52,7 +50,7 @@ module "pub-instance2" {
   instance-name-pub = var.name-of-instance-public2
   prv-alb-dns = module.private-load-balancer.dns-of-alb-prv
 }
-
+#----------------------------Private Modules
 
 module "prv-instance1" {
   source = "./private-instances"
@@ -65,16 +63,12 @@ module "prv-instance1" {
   user-data-inf =  <<EOF
     #!/bin/bash
     # install httpd (Linux Version2)
-    sudo yum update -y
-    sudo amazon-linux-extras install nginx1 -y 
-    sudo systemctl enable nginx
-    sudo systemctl start nginx
-    echo "<body>" > /var/www/html/index.html
-    echo "<h1 style="text-align:center;">Hello development Teams from $(hostname -f)</h1>" >> /var/www/html/index.html
-    echo "<p style="text-align:center;">From: Hussein Ghoraba</p>" >> /var/www/html/index.html
-    echo "<p style="text-align:center;">Tagged Version : Private Instance Number One </p> ">> /var/www/html/index.html
-    echo "</body>" >> /var/www/html/index.html
-    EOF
+    yum update -y
+    yum -y install httpd
+    systemctl start httpd
+    systemctl enable httpd
+    echo "<h1>Hello World From DevOps-Mansoura from $(hostname -f)<h1>" > /var/www/html/index.html
+  EOF
 }
 
 
@@ -87,16 +81,12 @@ module "prv-instance2" {
   instance-name-priv = var.name-of-instance-private2
   dependencies = module.nat-gateway
   user-data-inf =  <<EOF
-  #!/bin/bash
-  # install httpd (Linux Version2)
-  yum update -y
-  yum -y install httpd
-  systemctl start httpd
-  systemctl enable httpd
-  echo "<body>" > /var/www/html/index.html
-  echo "<h1 style="text-align:center;">Hello development Teams from $(hostname -f)</h1>" >> /var/www/html/index.html
-  echo "<p style="text-align:center;">From: Hussein Ghoraba</p>" >> /var/www/html/index.html
-  echo "<p style="text-align:center;">Tagged Version : Private Instance Number Two </p> ">> /var/www/html/index.html
-  echo "</body>" >> /var/www/html/index.html
+    #!/bin/bash
+    # install httpd (Linux Version2)
+    yum update -y
+    yum -y install httpd
+    systemctl start httpd
+    systemctl enable httpd
+    echo "<h1>Hello World From DevOps-Mansoura from $(hostname -f)<h1>" > /var/www/html/index.html
   EOF
 }

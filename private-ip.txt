@@ -1,4 +1,4 @@
-dev-instance-two-private 10.0.4.162
-dev-instance-one-private 10.0.1.140
-dev-instance-two-public 10.0.2.60
-dev-instance-one-public 10.0.0.214
+dev-instance-one-private 10.0.1.107
+dev-instance-two-private 10.0.4.219
+dev-instance-two-public 10.0.2.48
+dev-instance-one-public 10.0.0.75

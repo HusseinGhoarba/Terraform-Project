@@ -1,8 +1,8 @@
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "terraform-tfstate-remote-bkend-9290"
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_s3_bucket_versioning" "enable_versioning" {
@@ -22,13 +22,13 @@ resource "aws_dynamodb_table" "terraform_table" {
   }
 }
 
-# terraform {
-#   backend "s3" {
-#     bucket = "terraform_tfstate_remote_bkend"
-#     key    = "hussein/terraform.tfstate"
-#     region = "us-west-1"
+terraform {
+  backend "s3" {
+    bucket = "terraform-tfstate-remote-bkend-9290"
+    key    = "hussein/terraform.tfstate"
+    region = "us-east-2"
 
-#     dynamodb_table = "terraform_table_for_userID"
-#     encrypt = true
-#   }
-# }
+    dynamodb_table = "terraform_table_for_userID"
+    encrypt = true
+  }
+}
