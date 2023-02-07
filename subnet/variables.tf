@@ -9,3 +9,7 @@ variable "vpc-cidr-block" {
 variable "name-subnet" {
   
 }
+
+variable "az-subnet" {
+  
+}

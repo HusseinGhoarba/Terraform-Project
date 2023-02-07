@@ -41,23 +41,31 @@ name-of-private-sg-alb = "dev-private-security-group-ALB"
 #-------------------------------------------------------Instances-EC2
 #-------------Public Instances------------------
 value-of-checks = "true"
-key-pair-name = "devops.pem"
+key-pair-name = "hussein"
 type-of-instance = "t2.micro"
 type-of-connect = "ssh"
-user-of-instance = "ec2-user"
-private-key-path = "./devops.pem"
+user-of-instance = "ubuntu" #"ec2-user"
+private-key-path = "/home/hussein/ITIDevOps/terraform/lab3/terraform/hussein.pem"
 name-of-instance-public1 = "dev-instance-one-public"
 name-of-instance-public2 = "dev-instance-two-public"
 #-------------Public Instances------------------
 name-of-instance-private1 = "dev-instance-one-private"
 name-of-instance-private2 = "dev-instance-two-private"
 #-------------------------------------------------------Load-Balancer
+#--------General Requires------
+type-of-load-balancer = "application"
+internal-check-of-alb-pub = false
+internal-check-of-alb-prv = true
+type-of-target-grp = "instance"
+action-of-load-balancer-listner = "forward"
+#-------Listners
+port-of-instance-alb-listners = 80
+protocol-of-instance-alb-listners = "HTTP"
 #---------------Public-load-balancer--------------------
 name-of-the-pub-lb = "dev-public-load-balancer"
-#-------Listners
-port-of-instance-alb-listners = 8000
-protocol-of-instance-alb-listners = "http"
-port-of-alb-listners = 80
-protocol-of-alb-listners = "http"
-#--------General Requires
-name-of-pub-alb-in-tags = "dev-public-alb"
+name-of-pub-alb-in-tags = "dev-public-alb" 
+target-grp-pub = "dev-pub-target"
+#---------------Public-load-balancer--------------------
+name-of-the-priv-lb = "dev-private-load-balancer"
+name-of-priv-alb-in-tags = "dev-private-alb"
+target-grp-prv = "dev-prv-target"

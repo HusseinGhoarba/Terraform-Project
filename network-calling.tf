@@ -10,6 +10,7 @@ module "public-subnet" {
   vpc-cidr-block = module.vpc-igw.vpc1-id
   subnet-cidr-blocks = var.public-subnet-cidr-blocks
   name-subnet = var.subnet-public-name
+  az-subnet = ["us-east-2a","us-east-2b"]
 }
 
 module "private-subnet" {
@@ -17,6 +18,7 @@ module "private-subnet" {
   vpc-cidr-block = module.vpc-igw.vpc1-id
   subnet-cidr-blocks = var.private-subnet-cidr-blocks
   name-subnet = var.subnet-private-name
+  az-subnet = ["us-east-2a","us-east-2b"]
 }
 
 module "nat-gateway" {
@@ -45,5 +47,5 @@ module "route-association-public" {
 module "route-association-private" {
   source = "./route-associations"
   subnet-ip-assoc = [module.private-subnet.first-sub,module.private-subnet.second-sub]
-  table-id-assoc =  module.route-tables.public-tb-id
+  table-id-assoc =  module.route-tables.private-tb-id
 }

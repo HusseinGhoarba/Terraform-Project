@@ -199,35 +199,70 @@ variable "name-of-instance-private2" {
 }
 
 #-------------------------------------------------------Load-Balancer
+#-----------General Requires---
+variable "type-of-load-balancer" {
+  type = string
+  default = "application"
+}
+
+variable "type-of-target-grp" {
+  type = string
+  default = "instance"
+}
+
+variable "action-of-load-balancer-listner" {
+  type = string
+  default = "forward"
+}
+#-----------listners
+variable "port-of-instance-alb-listners" {
+  type = number
+  default = 80
+}
+
+variable "protocol-of-instance-alb-listners" {
+  type = string
+  default = "HTTP"
+}
+
 #---------------Public-load-balancer--------------------
 
 variable "name-of-the-pub-lb" {
   type = string
   default = "public-elb"
 }
-#-----------listners
-variable "port-of-instance-alb-listners" {
-  type = number
-  default = 8000
-}
 
-variable "protocol-of-instance-alb-listners" {
-  type = string
-  default = "http"
-}
-
-variable "port-of-alb-listners" {
-  type = number
-  default = 80
-}
-
-variable "protocol-of-alb-listners" {
-  type = string
-  default = "http"
-}
-#-----------General Requires---
 
 variable "name-of-pub-alb-in-tags" {
   type = string
   default = "pub-alb"
+}
+
+variable "internal-check-of-alb-pub" {
+  type = bool
+  default = false
+}
+
+variable "target-grp-pub" {
+  
+}
+
+#---------------Private-load-balancer--------------------
+variable "name-of-the-priv-lb" {
+  type = string
+  default = "private-elb"
+}
+
+variable "name-of-priv-alb-in-tags" {
+  type = string
+  default = "prv-alb"
+}
+
+variable "internal-check-of-alb-prv" {
+  type = bool
+  default = true
+}
+
+variable "target-grp-prv" {
+  
 }

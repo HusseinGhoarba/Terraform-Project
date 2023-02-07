@@ -11,23 +11,33 @@ variable "sg-for-lb" {
 
 }
 
+variable "lb-type" {
+  
+}
+
+variable "deny-check" {
+  type = bool
+  default = false
+}
+
+variable "internal-lb-check" {
+  
+}
+
 #-------------------------------listners------------------
 variable "instances-port" {
   
 }
 
-
 variable "instances-protocol" {
   
 }
 
-variable "load-balancer-port" {
-  
+variable "lisnter-action-type" {
+  type = string
+  default = "forward"
 }
 
-variable "load-balancer-protocol" {
-  
-}
 #-------------------------------Health check------------------
 
 variable "healthy-threshold-of-instances" {
@@ -46,9 +56,9 @@ variable "timeout-of-instances" {
   default = 3
 }
 
-variable "target-of-health-check" {
+variable "path-of-health-check" {
   type = string
-  default = "HTTP:8000/"
+  default = "/"
 }
 
 variable "interval-of-health-check" {
@@ -67,21 +77,24 @@ variable "checking-of-cross-zone-load-balancing" {
   default = true
 }
 
-variable "idle-timeout-of-load-balancer" {
-  type = number
-  default = 400
-}
-
-variable "checking-of-connection-draining" {
-  type = bool
-  default = true
-}
-
-variable "connection-draining-timeout-of-load-balancer" {
-  type = number
-  default = 400
-}
-
 variable "name-tags-of-load-balancer" {
 
+}
+
+#-------------------------------Target Groups------------------
+
+variable "target-grp-name" {
+  
+}
+
+variable "target-grp-type" {
+  
+}
+
+variable "vpc-id" {
+  
+}
+
+variable "dependencies" {
+  
 }

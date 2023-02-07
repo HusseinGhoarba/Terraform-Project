@@ -1,8 +1,8 @@
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "terraform_tfstate_remote_bkend"
-  lifecycle {
-    prevent_destroy = true
-  }
+  bucket = "terraform-tfstate-remote-bkend-9290"
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
 }
 
 resource "aws_s3_bucket_versioning" "enable_versioning" {

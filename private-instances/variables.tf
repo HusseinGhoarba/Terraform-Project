@@ -17,3 +17,11 @@ variable "sg-priv-id" {
 variable "instance-name-priv" {
 
 }
+
+variable "user-data-inf" {
+  
+}
+
+variable "dependencies" {
+  
+}
