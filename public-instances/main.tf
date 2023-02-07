@@ -19,21 +19,11 @@ resource "aws_instance" "hussein-ec2-public" {
 
   provisioner "remote-exec" {
     inline = [
-      # "sudo yum install http -y",
-      # "sudo yum install php -y",
-      # "sudo systemctl start httpd",
-      # "sudo systemctl start php"
       "sudo apt update -y",
       "sudo apt install nginx -y ",
       "echo 'server {\nlisten 80 default_server;\nlisten [::]:80 default_server;\nserver_name _;\nlocation / {\nproxy_pass http://${var.prv-alb-dns};\n}\n}' > default",
       "sudo mv default /etc/nginx/sites-enabled/default",
       "sudo systemctl restart nginx"
-      # "sudo apt update -y",
-      # "sudo apt install nginx -y ",
-      # "echo 'server { \n listen 80 default_server; \n  listen :80 default_server; \n  server_name _; \n  location / { \n  proxy_pass http://${var.prv-alb-dns}; \n  } \n}' > default",
-      # "sudo mv default /etc/nginx/sites-enabled/default",
-      # "sudo systemctl restart nginx",
-      # "sudo apt install curl -y"
     ]
   }
 
